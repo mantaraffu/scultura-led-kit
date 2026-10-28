@@ -1,0 +1,68 @@
+{
+  "temperature": {
+    "label": "Temperatura aria",
+    "unit": "°C",
+    "min": -5,
+    "max": 40
+  },
+  "humidity": {
+    "label": "Umidità aria",
+    "unit": "%",
+    "min": 0,
+    "max": 100
+  },
+  "co2": {
+    "label": "CO2",
+    "unit": "ppm",
+    "min": 400,
+    "max": 1500
+  },
+  "pm10": {
+    "label": "PM10",
+    "unit": "µg/m³",
+    "min": 0,
+    "max": 100
+  },
+  "pm2_5": {
+    "label": "PM2.5",
+    "unit": "µg/m³",
+    "min": 0,
+    "max": 75
+  },
+  "noise": {
+    "label": "Rumore",
+    "unit": "dB",
+    "min": 30,
+    "max": 100
+  },
+  "pressure": {
+    "label": "Pressione",
+    "unit": "hPa",
+    "min": 980,
+    "max": 1040
+  },
+  "wind_speed": {
+    "label": "Velocità vento",
+    "unit": "m/s",
+    "min": 0,
+    "max": 20
+  },
+  "wind_dir": {
+    "label": "Direzione vento",
+    "unit": "°",
+    "min": 0,
+    "max": 360
+  },
+  "aqi": {
+    "label": "Qualità dell'aria",
+    "unit": "AQI",
+    "min": 0,
+    "max": 300
+  },
+  "people": {
+    "label": "Affollamento",
+    "unit": "persone",
+    "min": 0,
+    "max": 500
+  }
+}

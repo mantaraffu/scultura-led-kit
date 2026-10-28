@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0e0f12" />
+  <title>Kit delle scene</title>
+  <!-- CodeMirror prima: così il tema scuro di style.css vince sul suo foglio chiaro. -->
+  <link rel="stylesheet" href="./vendor/codemirror/codemirror.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <script type="importmap">{
+  "imports": {
+    "#preact": "./vendor/htm/standalone.module.js",
+    "#acorn": "./vendor/acorn/acorn.mjs",
+    "#shared/": "./lib/shared/",
+    "#renderer/": "./lib/renderer/",
+    "#sim": "./lib/sim/simulator.js",
+    "#three": "./vendor/three/three.module.js",
+    "#three/controls": "./vendor/three/OrbitControls.js",
+    "three": "./vendor/three/three.module.js"
+  }
+}</script>
+</head>
+<body>
+  <div id="app"><p class="loading">Caricamento…</p></div>
+  <script src="./vendor/codemirror/codemirror.js"></script>
+  <script src="./vendor/codemirror/addon/edit/closebrackets.js"></script>
+  <script src="./vendor/codemirror/addon/edit/matchbrackets.js"></script>
+  <script src="./vendor/codemirror/mode/javascript.js"></script>
+  <script src="./vendor/p5/p5.min.js"></script>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
