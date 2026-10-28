@@ -32,6 +32,10 @@ h3 { font-size: 0.9rem; margin: 14px 0 6px; color: var(--muted); }
 .alert.warn { background: #33280f; border: 1px solid var(--warn); }
 .alert.ok { background: #12301f; border: 1px solid var(--ok); }
 .alert span, .problems { overflow-wrap: anywhere; }
+.scene-list { background: var(--card); border: 1px solid var(--line); display: block; }
+.scene-list p { margin: 0 0 8px; }
+.scelta { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.scelta button { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; padding: 10px 12px; min-height: 56px; text-align: left; }
 .problems { margin: 8px 0 0; padding-left: 18px; }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); top: calc(12px + env(safe-area-inset-top, 0px)); background: #2b2e36; padding: 10px 16px; border-radius: 10px; z-index: 30; max-width: 90vw; }
 .toast.error { background: var(--danger); }
@@ -50,6 +54,8 @@ h3 { font-size: 0.9rem; margin: 14px 0 6px; color: var(--muted); }
 .kit-tabs { position: fixed; bottom: 0; left: 0; right: 0; display: flex; background: #15171b; border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom); z-index: 20; }
 .kit-tabs button { flex: 1; background: transparent; border-radius: 0; min-height: 56px; color: var(--muted); }
 .kit-tabs button[aria-current="page"] { color: var(--text); box-shadow: inset 0 3px 0 var(--link); }
+.kit-foot { padding: 4px 12px calc(80px + env(safe-area-inset-bottom, 0px)); }
+.kit-foot a { color: var(--link); }
 .kit-main { display: grid; gap: 12px; padding: 12px 12px calc(80px + env(safe-area-inset-bottom, 0px)); min-width: 0; }
 .kit-main > section { min-width: 0; }
 .kit-main > section[hidden] { display: none; }
@@ -113,5 +119,6 @@ h3 { font-size: 0.9rem; margin: 14px 0 6px; color: var(--muted); }
   .kit-main > section { display: block !important; }
   .editor-host { height: calc(100vh - 150px); }
   .alert { margin-left: 0; margin-right: 0; }
+  .kit-foot { padding-bottom: 16px; max-width: 1500px; margin: 0 auto; }
   .kit-head { max-width: 1500px; margin: 0 auto; }
 }

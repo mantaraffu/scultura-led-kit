@@ -1,0 +1,78 @@
+[
+  {
+    "file": "gravita.js",
+    "name": "Gravità",
+    "author": "scultura-led",
+    "space": "strip",
+    "metrics": [
+      "people",
+      "pm10",
+      "wind_speed",
+      "wind_dir",
+      "temperature",
+      "pressure"
+    ]
+  },
+  {
+    "file": "sedimenti.js",
+    "name": "Sedimenti",
+    "author": "scultura-led",
+    "space": "strip",
+    "metrics": [
+      "pm10",
+      "pm2_5",
+      "co2",
+      "noise"
+    ]
+  },
+  {
+    "file": "didascalia.js",
+    "name": "Cosa sentiamo",
+    "author": "scultura-led",
+    "space": "strip",
+    "metrics": [
+      "temperature",
+      "humidity",
+      "co2",
+      "pm10",
+      "pm2_5",
+      "noise",
+      "wind_speed",
+      "people"
+    ]
+  },
+  {
+    "file": "correnti.js",
+    "name": "Correnti",
+    "author": "scultura-led",
+    "space": "panorama",
+    "metrics": [
+      "wind_speed",
+      "wind_dir",
+      "temperature",
+      "humidity",
+      "aqi"
+    ]
+  },
+  {
+    "file": "barre.js",
+    "name": "Barre dei sensori",
+    "author": "scultura-led",
+    "space": "strip",
+    "metrics": [
+      "temperature",
+      "humidity",
+      "co2",
+      "pm10"
+    ]
+  },
+  {
+    "file": "orbita.js",
+    "name": "Orbita",
+    "author": "scultura-led",
+    "space": "panorama",
+    "metrics": [
+      "temperature"
+    ]
+  }
+]

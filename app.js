@@ -30,11 +30,26 @@ export function slugify(name) {
 
 const emptySnapshot = { reads: [], observations: [], chain: [] };
 
+// Le scene dell'opera che l'autore ha scelto di pubblicare: l'elenco e il codice
+// stanno accanto al sito, in scene/.
+async function leggiElenco() {
+  const res = await fetch(new URL('./scene/elenco.json', import.meta.url));
+  if (!res.ok) throw new Error('elenco non trovato');
+  return res.json();
+}
+
+async function leggiScena(file) {
+  const res = await fetch(new URL(`./scene/${file}`, import.meta.url));
+  if (!res.ok) throw new Error(`scena non trovata: ${file}`);
+  return res.text();
+}
+
 export function App({
   metrics: metricsProp = null, initialSource = TEMPLATE_SOURCE, layout: layoutProp = null,
   simFactory = createSim, stageFactory = createStage, compile = compileScene, editorFactory = createEditor,
   storage = globalThis.localStorage ?? null, delayMs = 250, tickMs = 500, autoSaveMs = 2000,
   checkMs = 5000, checkStepMs = 1000, now = Date.now,
+  scenes: scenesProp = null, fetchScene = leggiScena,
 } = {}) {
   const [metrics, setMetrics] = useState(metricsProp);
   const [source, setSource] = useState(initialSource);
@@ -55,6 +70,8 @@ export function App({
   const [layout] = useState(() => layoutProp ?? resolveLayout({}));
   const [preview, setPreview] = useState(null);
   const [view, setView] = useState('3d');
+  const [scenes, setScenes] = useState(scenesProp ?? []);
+  const [showScenes, setShowScenes] = useState(false);
 
   const editorHost = useRef(null);
   const stageHost = useRef(null);
@@ -102,6 +119,17 @@ export function App({
       simRef.current = null;
     };
   }, [metrics, simFactory]);
+
+  useEffect(() => {
+    if (scenesProp) return undefined;
+    let off = false;
+    // Se non ci sono scene pubblicate il file non c'è: non è un errore, è un kit senza esempi.
+    leggiElenco().then(
+      (elenco) => { if (!off && Array.isArray(elenco)) setScenes(elenco); },
+      () => {},
+    );
+    return () => { off = true; };
+  }, [scenesProp]);
 
   useEffect(() => {
     if (!storage) return;
@@ -256,6 +284,17 @@ export function App({
     notify('Nuova scena dal modello');
   };
 
+  const openScene = (scene) => {
+    setShowScenes(false);
+    Promise.resolve(fetchScene(scene.file)).then((text) => {
+      editorRef.current?.setValue(text);
+      setSource(text);
+      setError(null);
+      setCheckResult(null);
+      notify(`Aperta «${scene.name}»: cambiala pure, il file dell'opera resta com'è`);
+    }, (err) => notify(`Non riesco ad aprire «${scene.name}»: ${err.message}`, true));
+  };
+
   const openFile = (event) => {
     const file = event.target?.files?.[0];
     if (!file) return;
@@ -395,6 +434,8 @@ export function App({
       </div>
       <div class="row wrap">
         <button onClick=${useTemplate}>Nuova scena</button>
+        ${scenes.length ? html`<button aria-expanded=${showScenes ? 'true' : 'false'}
+          onClick=${() => setShowScenes((v) => !v)}>Scene dell'opera</button>` : null}
         <button onClick=${() => fileInput.current?.click()}>Apri</button>
         <input ref=${fileInput} type="file" accept=".js,text/javascript" hidden onChange=${openFile} />
         <button onClick=${saveFile}>Salva</button>
@@ -402,6 +443,17 @@ export function App({
       </div>
     </header>
 
+    ${showScenes && scenes.length ? html`<div class="alert scene-list" role="dialog" aria-label="Scene dell'opera">
+      <div>
+        <p class="muted small">Le scene che girano sulla scultura. Aprine una per vedere come è fatta: quello che modifichi qui resta qui.</p>
+        <ul class="scelta">${scenes.map((s) => html`<li key=${s.file}>
+          <button class="ghost" onClick=${() => openScene(s)}>
+            <strong>${s.name}</strong>
+            <span class="muted small">${s.space === 'panorama' ? 'tutto il giro' : 'quattro facce'}${s.metrics?.length ? ` · ${s.metrics.join(', ')}` : ''}</span>
+          </button>
+        </li>`)}</ul>
+      </div>
+    </div>` : null}
     ${restore ? html`<div class="alert warn" role="status">
       <span>C'è un lavoro salvato in questo browser. Vuoi riprenderlo?</span>
       <span class="row"><button class="ghost" onClick=${ignoreSaved}>Ignora</button><button class="primary" onClick=${restoreSaved}>Ripristina</button></span>
@@ -453,5 +505,10 @@ export function App({
           snapshot=${snapshot} onOverride=${override} onClear=${clearOverride} onCopy=${copyMetric} />
       </section>
     </main>
+
+    <footer class="kit-foot muted small">
+      Kit delle scene — codice libero (MIT). Le librerie incluse (p5, three.js, CodeMirror,
+      acorn, htm) restano dei loro autori: <a href="./vendor/LICENZE.md">elenco e licenze</a>.
+    </footer>
   </div>`;
 }
