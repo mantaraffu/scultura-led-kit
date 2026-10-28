@@ -5,6 +5,13 @@ senza installare niente: si apre la pagina e si scrive.
 
 👉 **https://mantaraffu.github.io/scultura-led-kit/**
 
+## Da dove partire
+
+Nel kit, **Scene dell'opera** apre le scene che girano davvero sulla scultura —
+Gravità, Sedimenti, Cosa sentiamo, Correnti, Barre dei sensori, Orbita. Aprine una,
+guarda com'è fatta, cambiala: il file dell'opera resta com'è, quello che modifichi
+resta nel tuo browser.
+
 ## Com'è fatta una scena
 
 Un file `.js` solo, con dentro un oggetto:
@@ -40,6 +47,12 @@ export default {
 
 Premi **Controlla la scena**. Quando dice *Pronta da inviare*, premi **Salva**: scarichi
 il tuo `.js` e lo consegni all'autore nel modo concordato in aula.
+
+## Licenza
+
+Codice libero: **MIT** (vedi `LICENSE`). Le librerie incluse in `vendor/` — p5.js,
+three.js, CodeMirror, acorn, htm/preact — restano dei loro autori con le loro licenze,
+elencate in [`vendor/LICENZE.md`](vendor/LICENZE.md); p5.js in particolare è LGPL-2.1.
 
 ## Che cos'è questo repository
 
